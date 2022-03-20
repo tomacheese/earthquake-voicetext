@@ -127,6 +127,15 @@ async function main(): Promise<void> {
 }
 
 ;(async (): Promise<void> => {
+  const speaker = new Speaker({
+    channels: 1,
+    bitDepth: 16,
+    sampleRate: 44100,
+  })
+  fs.createReadStream(
+    await getAudioFile('earthquake-voicetextを起動しました。')
+  ).pipe(speaker)
+
   setInterval(async () => {
     await main()
   }, 1000)

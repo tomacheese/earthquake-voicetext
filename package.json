@@ -20,13 +20,11 @@
     "fix:prettier": "prettier --write src"
   },
   "devDependencies": {
-    "@types/config": "^0.0.40",
     "@types/fluent-ffmpeg": "^2.1.20",
     "@types/node": "^16.11.11",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "axios": "^0.24.0",
-    "config": "^3.3.6",
     "eslint": "8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
@@ -34,7 +32,6 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "fluent-ffmpeg": "^2.1.2",
-    "form-data": "^4.0.0",
     "prettier": "2.4.1",
     "speaker": "^0.5.4",
     "ts-node": "^10.4.0",

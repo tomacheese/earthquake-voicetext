@@ -137,6 +137,10 @@ async function main(): Promise<void> {
   ).pipe(speaker)
 
   setInterval(async () => {
-    await main()
+    try{
+      await main()
+    }catch(e){
+      console.error(e)
+    }
   }, 1000)
 })().catch((e) => console.error(e))

@@ -102,7 +102,7 @@ async function main(): Promise<void> {
     return
   }
   const magunitude: string = data.magunitude
-  if (parseFloat(magunitude.substring(0, 1)) < 5) {
+  if (calcintensity === '不明' && parseFloat(magunitude.substring(0, 1)) < 5) {
     // 不明で、マグニチュード5より小さい場合は除外
     return
   }

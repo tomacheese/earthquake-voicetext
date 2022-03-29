@@ -44,7 +44,7 @@ jobs:
 
       - name: Install dependencies 👨🏻‍💻
         run: |
-          apt-get -y install libasound2-dev
+          sudo apt-get -y install libasound2-dev
           yarn
 
       - name: Run linter 👀

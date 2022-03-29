@@ -43,7 +43,9 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies 👨🏻‍💻
-        run: yarn
+        run: |
+          apt-get -y install libasound2-dev
+          yarn
 
       - name: Run linter 👀
         run: yarn lint

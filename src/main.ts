@@ -86,6 +86,10 @@ async function main(): Promise<void> {
   const response = await Axios.get(
     `http://www.kmoni.bosai.go.jp/webservice/hypo/eew/${datetime}.json`
   )
+  if (response.status !== 200) {
+    console.error('Failed to get earthquake data')
+    return
+  }
   console.log(date, JSON.stringify(response.data))
 
   const data = response.data

@@ -4,6 +4,42 @@ import ffmpeg from 'fluent-ffmpeg'
 import fs from 'fs'
 import Speaker from 'speaker'
 
+const speakeds: string[] = []
+let speakingSpeaker: Speaker | null = null
+
+export interface Result {
+  status: string
+  message: string
+  is_auth: boolean
+}
+
+export interface Security {
+  realm: string
+  hash: string
+}
+
+export interface EEW {
+  result: Result
+  report_time: string
+  region_code: string
+  request_time: string
+  region_name: string
+  longitude: string
+  is_cancel: boolean
+  depth: string
+  calcintensity: string
+  is_final: boolean
+  is_training: boolean
+  latitude: string
+  origin_time: string
+  security: Security
+  magunitude: string
+  report_num: string
+  request_hypo_type: string
+  report_id: string
+  alertflg: string
+}
+
 async function getAudioFile(message: string): Promise<string> {
   if (!fs.existsSync('audio/')) {
     fs.mkdirSync('audio/')
@@ -75,6 +111,13 @@ function formatDate(date: Date, format: string): string {
   return format
 }
 
+/*
+条件:
+・震度が不明ではない場合、震度4以上
+・震度が不明の場合、マグニチュード5以上
+・報告は第一報と震度変化のみ
+*/
+
 async function main(): Promise<void> {
   const Axios = axios.create({
     validateStatus: () => true,
@@ -92,7 +135,7 @@ async function main(): Promise<void> {
   }
   console.log(date, JSON.stringify(response.data))
 
-  const data = response.data
+  const data: EEW = response.data
   if (data.result.message.length > 0) {
     console.log(date, data.result.message)
     return
@@ -113,6 +156,13 @@ async function main(): Promise<void> {
 
   // → 震度4以上 or 震度不明マグニチュード5以上
 
+  const eqId = data.report_id + '-' + data.calcintensity
+  if (speakeds.includes(eqId)) {
+    console.log('Already spoken', eqId)
+    return
+  }
+  speakeds.push(eqId)
+
   const messages = [
     '緊急地震速報。',
     data.region_name,
@@ -127,7 +177,11 @@ async function main(): Promise<void> {
     bitDepth: 16,
     sampleRate: 44100,
   })
-  fs.createReadStream(concatAudioFiles).pipe(speaker)
+  if (speakingSpeaker) {
+    speakingSpeaker.destroy()
+    speakingSpeaker = null
+  }
+  speakingSpeaker = fs.createReadStream(concatAudioFiles).pipe(speaker)
 }
 
 ;(async (): Promise<void> => {

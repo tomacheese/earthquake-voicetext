@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/fluent-ffmpeg": "2.1.20",
-    "@types/node": "16.11.57",
+    "@types/node": "16.11.58",
     "@typescript-eslint/eslint-plugin": "5.36.2",
     "@typescript-eslint/parser": "5.36.2",
     "axios": "0.27.2",

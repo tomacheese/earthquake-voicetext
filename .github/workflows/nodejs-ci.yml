@@ -69,7 +69,7 @@ jobs:
 
       - name: 👨🏻‍💻 Install dependencies
         run: |
-          apt-get Install -y libsound2-dev
+          apt-get install -y libsound2-dev
           yarn
 
       - name: 👀 Run linter

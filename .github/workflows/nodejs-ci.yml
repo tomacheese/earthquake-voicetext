@@ -70,7 +70,7 @@ jobs:
       - name: 👨🏻‍💻 Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libsound2-dev
+          sudo apt-get install -y libasound2-dev
           yarn
 
       - name: 👀 Run linter

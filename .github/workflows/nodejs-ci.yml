@@ -68,7 +68,9 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: 👨🏻‍💻 Install dependencies
-        run: yarn
+        run: |
+          apt-get Install -y libsound2-dev
+          yarn
 
       - name: 👀 Run linter
         if: steps.package-json.outputs.lint == 'true'

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build: ./
+    user: '1000:1000'
+    volumes:
+      - type: bind
+        source: /run/user/1000/pulse/native
+        target: /tmp/pulse/native
+      - type: bind
+        source: ~/.config/pulse/cookie
+        target: /tmp/pulse/cookie
+    restart: always

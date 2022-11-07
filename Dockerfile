@@ -2,8 +2,7 @@ FROM node:16-alpine
 
 RUN apk update && \
   apk upgrade && \
-  apk add --no-cache pulseaudio && \
-  adduser -u "$(id -u)" user
+  apk add --no-cache pulseaudio
 
 WORKDIR /app
 

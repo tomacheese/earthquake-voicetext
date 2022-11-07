@@ -2,14 +2,16 @@ FROM node:16-alpine
 
 RUN apk update && \
   apk upgrade && \
-  apk add --no-cache pulseaudio
+  apk add --no-cache pulseaudio avahi-dev && \
+  apk add --no-cache --virtual .gyp python make g++
 
 WORKDIR /app
 
 COPY package.json .
 COPY yarn.lock .
 RUN yarn install && \
-  yarn cache clean
+  yarn cache clean && \
+  apk del .gyp
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh

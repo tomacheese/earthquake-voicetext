@@ -2,7 +2,7 @@ FROM node:16-alpine
 
 RUN apk update && \
   apk upgrade && \
-  apk add --no-cache pulseaudio avahi-dev && \
+  apk add --no-cache pulseaudio avahi-dev alsa-lib-dev && \
   apk add --no-cache --virtual=.gyp python3 make g++
 
 WORKDIR /app

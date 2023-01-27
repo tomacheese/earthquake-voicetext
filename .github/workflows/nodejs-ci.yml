@@ -16,4 +16,6 @@ jobs:
   node-ci:
     name: Node CI
     uses: book000/templates/.github/workflows/reusable-nodejs-ci.yml@master
+    with:
+      install-apt-packages: libasound2-dev
 
